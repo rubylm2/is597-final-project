@@ -5,6 +5,7 @@ Open RStudio and install the required packages. You'll need 'tm' for text mining
 
 R
 install.packages("tm")
+
 install.packages("topicmodels")
 
 # Load the required libraries
