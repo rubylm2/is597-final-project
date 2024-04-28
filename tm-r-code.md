@@ -31,3 +31,22 @@ stopwords <- readLines(stopwords_path)
 
 corpus <- tm_map(corpus, removeWords, stopwords)
 
+6. **Create a document-term matrix (DTM)**: Convert the text data into a document-term matrix, which is a numerical representation of the text data where rows represent documents and columns represent terms.
+
+dtm <- DocumentTermMatrix(corpus)
+
+7. **Perform topic modeling**: Use the 'LDA' function from the 'topicmodels' package to perform Latent Dirichlet Allocation (LDA) topic modeling on the document-term matrix.
+
+lda_model <- LDA(dtm, k = 5)  # Specify the number of topics (k)
+
+8. **Inspect the topics**: Once the model is trained, you can inspect the topics and the most probable terms associated with each topic.
+
+terms <- terms(lda_model, 10)  # Get the top 10 terms for each topic
+terms
+
+9. **Assign topics to documents:** You can assign topics to documents based on the probability distribution of topics within each document
+
+corpus <- Corpus(DirSource(".", pattern = "*.txt"))
+
+10. **Explore and interpret results**: Finally, explore the results of your topic modeling analysis, visualize topics, and interpret the findings to gain insights into the underlying themes present in your text data.
+
