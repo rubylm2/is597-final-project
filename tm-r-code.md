@@ -50,3 +50,29 @@ corpus <- Corpus(DirSource(".", pattern = "*.txt"))
 
 10. **Explore and interpret results**: Finally, explore the results of your topic modeling analysis, visualize topics, and interpret the findings to gain insights into the underlying themes present in your text data.
 
+
+# Preprocess the text data
+corpus_preprocessed <- tm_map(corpus, content_transformer(tolower))
+corpus_preprocessed <- tm_map(corpus_preprocessed, removePunctuation)
+corpus_preprocessed <- tm_map(corpus_preprocessed, removeNumbers)
+corpus_preprocessed <- tm_map(corpus_preprocessed, removeWords, stopwords)
+corpus_preprocessed <- tm_map(corpus_preprocessed, stemDocument)
+
+# Export preprocessed text data to new text files
+output_dir <- "preprocessed_text_files"
+if (!file.exists(output_dir)) {
+  dir.create(output_dir)
+}
+
+for (i in seq_along(corpus_preprocessed)) {
+  text <- as.character(corpus_preprocessed[[i]])
+  file_name <- paste(output_dir, "/", names(corpus_preprocessed)[i], sep = "")
+  writeLines(text, file_name)
+}
+
+In this code:
+
+'corpus_proprocessed' contains the preprocessed text data after applying the text transformations using 'tm_map'.
+A directory called "preprocessed_text_files" to store the output files if it doesn't already exist. 
+We then iterate over each document in the preprocessed corpus, extract the text content, and write it to new text files in the "preprocessed_text_files" directory. 
+
